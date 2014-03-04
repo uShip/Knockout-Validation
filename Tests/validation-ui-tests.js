@@ -12,6 +12,8 @@
 	expect: false
 */
 
+var ERR_ELEMENT_NODE_TYPE = 'small';
+
 module('UI Tests', {
     setup: function () {
 
@@ -502,7 +504,7 @@ test('Validation Options - Options only apply to their HTML Contexts', function 
 
     ok(!vm.firstName.isValid(), 'Validation Still works correctly');
 
-    var insertMsgCt = $firstName.siblings('span').length;
+    var insertMsgCt = $firstName.siblings(ERR_ELEMENT_NODE_TYPE).length;
     equal(insertMsgCt, 1, 'Should have inserted 1 message beside the first name!');
 
 });

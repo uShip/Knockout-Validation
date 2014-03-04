@@ -270,7 +270,7 @@
 				//	  }
 				//  )};
 				//
-				if (params && (params.message || params.onlyIf)) { //if it has a message or condition object, then its an object literal to use
+				if (params && (Object.prototype.hasOwnProperty.call(params, "message") || params.onlyIf)) { //if it has a message or condition object, then its an object literal to use
 					return ko.validation.addRule(observable, {
 						rule: ruleName,
 						message: params.message,
@@ -302,7 +302,8 @@
 
 		//creates a span next to the @element with the specified error class
 		insertValidationMessage: function (element) {
-			var span = document.createElement('SPAN');
+			var nodeType = ko.validation.configuration.errorMessageNodeType || 'SPAN';
+			var span = document.createElement(nodeType);
 			span.className = utils.getConfigOptions(element).errorMessageClass;
 			utils.insertAfter(element, span);
 			return span;
