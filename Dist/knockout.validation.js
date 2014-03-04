@@ -370,6 +370,15 @@ kv.configuration = configuration;
 			obj.isValid = function () {
 				return obj.errors().length === 0;
 			};
+			obj.isValidating = ko.computed(function () {
+				var isValidating = false;
+				forEach(context.validatables, function (observable) {
+					if (observable.isValidating()) {
+						isValidating = true;
+					}
+				});
+				return isValidating;
+			});
 			obj.isAnyMessageShown = function () {
 				var invalidAndModifiedPresent = false;
 
