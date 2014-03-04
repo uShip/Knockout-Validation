@@ -12,6 +12,10 @@
 	expect: false
 */
 
+var ERR_ELEMENT_CLASS = "error",
+    ERR_MSG_CLASS = "error";
+
+
 module('UI Tests', {
     setup: function () {
 
@@ -60,14 +64,14 @@ test("checked binding sets error class on radio buttons", function() {
     applyTestBindings(vm);
 
     ok(!vm.result.isValid(), "Should initially be invalid");
-    ok($input.hasClass("validationElement"), "Validation class should have been added");
+    ok($input.hasClass(ERR_ELEMENT_CLASS), "Validation class should have been added");
 
     $input.prop("checked", true);
     $input.click(); //trigger the validation
 
     equal(vm.result(), "two", "Value should have changed");
     ok(vm.result.isValid(), "Should now be valid");
-    ok(!$input.hasClass("validationElement"), "Validation class should have been removed");
+    ok(!$input.hasClass(ERR_ELEMENT_CLASS), "Validation class should have been removed");
 });
 
 //#region Inserting Messages
@@ -151,7 +155,7 @@ test('Decorating Elements Works', function () {
 
     var $testInput = $('#myTestInput');
 
-    ok(!$testInput.hasClass('validationElement'), "CSS class shouldn't present");
+    ok(!$testInput.hasClass(ERR_ELEMENT_CLASS), "CSS class shouldn't present");
 
     $testInput.val("a"); //set it
     $testInput.change(); //trigger change event
@@ -159,7 +163,7 @@ test('Decorating Elements Works', function () {
     $testInput.val(""); //set it
     $testInput.change(); //trigger change event
 
-    ok($testInput.hasClass('validationElement'), "CSS class should present");
+    ok($testInput.hasClass(ERR_ELEMENT_CLASS), "CSS class should present");
 });
 
 test('Decorating Elements On Modified Works', function () {
@@ -180,12 +184,12 @@ test('Decorating Elements On Modified Works', function () {
 
     var $testInput = $('#myTestInput');
 
-    ok($testInput.hasClass('validationElement'), "CSS class should present");
+    ok($testInput.hasClass(ERR_ELEMENT_CLASS), "CSS class should present");
 
     $testInput.val("a"); //set it
     $testInput.change(); //trigger change event
 
-    ok(!$testInput.hasClass('validationElement'), "CSS class shouldn't present");
+    ok(!$testInput.hasClass(ERR_ELEMENT_CLASS), "CSS class shouldn't present");
 });
 
 //#endregion
@@ -546,12 +550,12 @@ test("Issue #44 - Validation Element - Is Valid Test", function () {
     applyTestBindings(vm);
 
     var $el = $('#testElement');
-    ok(!$el.hasClass('validationElement'), 'Does not have the validation class');
+    ok(!$el.hasClass(ERR_ELEMENT_CLASS), 'Does not have the validation class');
 
     vm.testObj(2); // should validate the min rule
 
     ok(vm.testObj.isValid(), "Object is valid");
-    ok(!$el.hasClass('validationElement'), 'Correctly does not have the validation class');
+    ok(!$el.hasClass(ERR_ELEMENT_CLASS), 'Correctly does not have the validation class');
 
 });
 
@@ -569,12 +573,12 @@ test("Issue #44 - Validation Element - Is Invalid Test", function () {
     applyTestBindings(vm);
 
     var $el = $('#testElement');
-    ok(!$el.hasClass('validationElement'), 'Does not have the validation class');
+    ok(!$el.hasClass(ERR_ELEMENT_CLASS), 'Does not have the validation class');
 
     vm.testObj(-1); // should invalidate the min rule
 
     ok(!vm.testObj.isValid(), "Object is not valid");
-    ok($el.hasClass('validationElement'), 'Correctly does have the validation class');
+    ok($el.hasClass(ERR_ELEMENT_CLASS), 'Correctly does have the validation class');
 
 });
 
